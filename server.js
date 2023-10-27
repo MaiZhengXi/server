@@ -36,9 +36,13 @@ app.post("/send-email", (req, res) => {
       res.status(500).send("Error al enviar el correo");
     } else {
       console.log("Correo enviado: " + info.response);
-      // Realiza la redirección antes de enviar la respuesta de éxito
-      res.redirect("https://www.zx-studio.com/index.html");
-      // No envíes la respuesta de éxito aquí, ya que la redirección terminará la solicitud
+      res.status(200).send("Correo enviado con éxito");
     }
   });
+});
+
+const port = process.env.PORT || 4000;
+
+app.listen(port, () => {
+  console.log(`Servidor Node.js en ejecución en el puerto ${port}`);
 });
