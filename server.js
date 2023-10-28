@@ -23,7 +23,7 @@ const destinatario = "contacto@zx-studio.com";
 // Agrega un middleware para permitir solicitudes CORS desde tu sitio web
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://www.zx-studio.com"); // Cambia esto por la URL de tu sitio
-  res.header("Access-Control-Allow-Methods", "POST");
+  res.header("Access-Control-Allow-Methods", "post");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
