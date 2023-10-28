@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const transporter = nodemailer.createTransport({
@@ -20,14 +20,23 @@ const transporter = nodemailer.createTransport({
 
 const destinatario = "contacto@zx-studio.com";
 
+// Agrega un middleware para permitir solicitudes CORS desde tu sitio web
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://www.zx-studio.com"); // Cambia esto por la URL de tu sitio
+  res.header("Access-Control-Allow-Methods", "post");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.post("/send-email", (req, res) => {
   const { contactName, contactEmail, contactPhone, contactMessage } = req.body;
+  console.log(req.body);
 
   const mailOptions = {
     from: "contacto@zx-studio.com",
     to: destinatario,
     subject: "Nuevo mensaje de contacto",
-    text: `Nombre: ${contactName}\nEmail: ${contactEmail}\nTeléfono: ${contactPhone}\nMensaje: ${contactMessage}`,
+    text: `Nombre: \n${contactName}\nEmail: \n${contactEmail}\nTeléfono: \n${contactPhone}\nMensaje: \n${contactMessage}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
