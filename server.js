@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 app.post("/send-email", (req, res) => {
   const { contactName, contactEmail, contactPhone, contactMessage } = req.body;
-  console.log("kkk" + req.body);
+  console.log("kkk" + req.params.contactEmail);
 
   const mailOptions = {
     from: "contacto@zx-studio.com",
