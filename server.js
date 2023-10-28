@@ -35,7 +35,7 @@ app.post("/send-email", (req, res) => {
     from: "contacto@zx-studio.com",
     to: destinatario,
     subject: "Nuevo mensaje de contacto",
-    text: `Nombre: ${contactName}\nEmail: ${contactEmail}\nTeléfono: ${contactPhone}\nMensaje: ${contactMessage}`,
+    text: `Nombre: \n${contactName}\nEmail: \n${contactEmail}\nTeléfono: \n${contactPhone}\nMensaje: \n${contactMessage}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
