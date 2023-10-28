@@ -27,10 +27,10 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
-console.log(req.body);
 
 app.post("/send-email", (req, res) => {
   const { contactName, contactEmail, contactPhone, contactMessage } = req.body;
+  console.log(req.body);
 
   const mailOptions = {
     from: "contacto@zx-studio.com",
