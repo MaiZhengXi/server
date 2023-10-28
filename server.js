@@ -22,7 +22,7 @@ const destinatario = "contacto@zx-studio.com";
 
 // Agrega un middleware para permitir solicitudes CORS desde tu sitio web
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://www.zx-studio.com"); // Cambia esto por la URL de tu sitio
+  res.header("Access-Control-Allow-Origin", "https://www.zx-studio.com");
   res.header("Access-Control-Allow-Methods", "post");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
@@ -44,7 +44,7 @@ app.post("/send-email", (req, res) => {
       console.log(error);
       res.status(500).send("Error al enviar el correo");
     } else {
-      console.log("Correo enviado: " + info.response);
+      console.log("Correo enviado:XXXX " + info.response);
       res.status(200).send("Correo enviado con éxito");
     }
   });
