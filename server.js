@@ -16,7 +16,7 @@ const destinatario = "contacto@zx-studio.com";
 app.use(function (req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    "http://127.0.0.1:5500/contact.html"
+    "http://www.zx-studio.com/contact.html"
   );
   res.header(
     "Access-Control-Allow-Headers",
@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.post("/send-email", (req, res) => {
+app.get("/send-email", (req, res) => {
   const { contactName, contactEmail, contactPhone, contactMessage } = req.body;
   console.log("kkk" + req.body);
 
