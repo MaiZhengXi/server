@@ -8,15 +8,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const transporter = nodemailer.createTransport({
-  host: "smtp-legacy.office365.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: "contacto@zx-studio.com",
-    pass: "ZXStudio2023",
-  },
-});
+
 
 const destinatario = "contacto@zx-studio.com";
 
@@ -33,7 +25,17 @@ app.use((req, res, next) => {
 
 app.post("/send-email", (req, res) => {
   const { contactName, contactEmail, contactPhone, contactMessage } = req.body;
-  console.log("kkk" + req.params.contactEmail);
+  console.log("kkk" + req.body);
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp-legacy.office365.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "contacto@zx-studio.com",
+      pass: "ZXStudio2023",
+    },
+  });
 
   const mailOptions = {
     from: "contacto@zx-studio.com",
