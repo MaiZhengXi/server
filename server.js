@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/send-email", (req, res) => {
+app.post("/send-email", (req, res) => {
   const { contactName, contactEmail, contactPhone, contactMessage } = req.body;
   console.log("kkk" + req.body);
 
