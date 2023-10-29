@@ -8,18 +8,15 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-
 const destinatario = "contacto@zx-studio.com";
 
 // Agrega un middleware para permitir solicitudes CORS desde tu sitio web
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://www.zx-studio.com");
   res.header(
-    "Access-Control-Allow-Origin",
-    "https://www.zx-studio.com/contact.html"
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Methods", "get");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
@@ -41,7 +38,7 @@ app.post("/send-email", (req, res) => {
     from: "contacto@zx-studio.com",
     to: destinatario,
     subject: "Nuevo mensaje de contacto",
-    text: `Nombre: ${contactName}\nEmail: ${contactEmail}\nTeléfono: ${contactPhone}\nMensaje: ${contactMessage}`
+    text: `Nombre: ${contactName}\nEmail: ${contactEmail}\nTeléfono: ${contactPhone}\nMensaje: ${contactMessage}`,
   };
   console.log(mailOptions);
 
