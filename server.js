@@ -12,7 +12,6 @@ app.use(cors());
 
 const destinatario = "contacto@zx-studio.com";
 
-// Agrega un middleware para permitir solicitudes CORS desde tu sitio web
 app.use(function (req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
@@ -25,9 +24,35 @@ app.use(function (req, res, next) {
   next();
 });
 
+const sendConfirmationEmail = (email, message) => {
+  const transporter = nodemailer.createTransport({
+    host: "smtp-legacy.office365.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "contacto@zx-studio.com",
+      pass: "ZXStudio2023",
+    },
+  });
+
+  const mailOptions = {
+    from: "contacto@zx-studio.com",
+    to: email,
+    subject: "Gracias por ponerse en contacto con nosotros",
+    text: "Hemos recibido tu solicitud un asesor pronto se pondra en contacto contigo. Recuerda que nos puedes contactar a nuestro whatsapp 0981536551",
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Correo de confirmación enviado: " + info.response);
+    }
+  });
+};
+
 app.post("/send-email", (req, res) => {
   const { contactName, contactEmail, contactPhone, contactMessage } = req.body;
-  console.log("kkk" + req.body);
 
   const transporter = nodemailer.createTransport({
     host: "smtp-legacy.office365.com",
@@ -45,21 +70,25 @@ app.post("/send-email", (req, res) => {
     subject: "Nuevo mensaje de contacto",
     text: `Nombre: ${contactName}\nEmail: ${contactEmail}\nTeléfono: ${contactPhone}\nMensaje: ${contactMessage}`,
   };
-  console.log(mailOptions);
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log(error);
       res.status(500).send("Error al enviar el correo");
     } else {
-      console.log("Correo enviado:XXXX " + info.response);
+      console.log("Correo enviado: " + info.response);
       res.status(200).send("Correo enviado con éxito");
+
+      const confirmationMessage = `Gracias por ponerse en contacto con nosotros. Hemos recibido su mensaje y nos pondremos en contacto con usted a la brevedad.
+      
+      Atentamente,
+      Equipo de ZX Studio`;
+
+      sendConfirmationEmail(contactEmail, confirmationMessage);
     }
   });
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log(`Servidor Node.js en ejecución en el puerto ${port}`);
-});
+app.listen(port, () => console.log(`Servidor escuchando en el puerto ${port}`));
