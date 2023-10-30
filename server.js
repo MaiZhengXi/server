@@ -57,8 +57,8 @@ app.post("/send-email", (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: "contacto@zx-studio.com",
-      pass: "ZXStudio2023",
+      user: "avelezp@zx-studio.com",
+      pass: "Zhengxi2023",
     },
   });
 
