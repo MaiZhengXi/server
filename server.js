@@ -26,12 +26,12 @@ app.use(function (req, res, next) {
 
 const sendConfirmationEmail = (email, message) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp-legacy.office365.com",
+    host: "smtp1.s.ipzmarketing.com",
     port: 587,
     secure: false,
     auth: {
-      user: "contacto@zx-studio.com",
-      pass: "ZXStudio2023",
+      user: "nqgmdgrprqke",
+      pass: "4FOZUNkVaF6PmAtF",
     },
   });
 
