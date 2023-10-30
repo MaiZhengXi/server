@@ -1,3 +1,5 @@
+/** @format */
+
 const express = require("express");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
@@ -57,13 +59,13 @@ app.post("/send-email", (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: "avelezp@zx-studio.com",
-      pass: "Zhengxi2023",
+      user: "contacto@zx-studio.com",
+      pass: "ZXStudio2023",
     },
   });
 
   const mailOptions = {
-    from: "avelezp@zx-studio.com",
+    from: "contacto@zx-studio.com",
     to: destinatario,
     subject: "Nuevo mensaje de contacto",
     text: `Nombre: ${contactName}\nEmail: ${contactEmail}\nTeléfono: ${contactPhone}\nMensaje: ${contactMessage}`,
